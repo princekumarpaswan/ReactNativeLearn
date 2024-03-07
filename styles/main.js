@@ -6,7 +6,8 @@ export const stylesMain = StyleSheet.create({
    justifyContent: "center",
    alignItems: "start",
    flex: 1,
-   paddingLeft: 15
+   paddingLeft: 15,
+   backgroundColor: "black",
   },
   inputContainer:{
     // flex: 1,
@@ -20,14 +21,24 @@ export const stylesMain = StyleSheet.create({
     width: "80%",
     padding: 2,
     paddingLeft: 10,
+    color: "white"
   },
   list:{
     flex: 2,
   },
   items: {
     margin: 8,
-    padding: 8,
+    // padding: 8,
     borderRadius: 6,
-    backgroundColor: "#EA7773"
+    backgroundColor: "#EA7773",
+ 
+  },
+  text:{
+    padding: 8,
+    color: "white"
+  },
+  ios: {
+    backgroundColor: 'green',
+    opacity: 0.5
   }
 });

@@ -1,7 +1,8 @@
 // import { StatusBar } from 'expo-status-bar';
-import { Button, ScrollView, Text, TextInput, View } from "react-native";
+import { Button, FlatList, StatusBar, TextInput, View } from "react-native";
 import { stylesMain } from "./styles/main";
 import { useState } from "react";
+import List from "./components/List";
 
 export default function App() {
   const [list, setList] = useState([]);
@@ -9,33 +10,31 @@ export default function App() {
 
   const handlePress = () => {
     setList((prev) => [...prev, input]);
-  };
-
-  const handleRemove = (key) => {
-    console.log(key);
+    setInput("");
   };
 
   return (
-    <View style={stylesMain.mainStart}>
-      <View style={stylesMain.inputContainer}>
-        <TextInput
-          style={stylesMain.textInput}
-          onChangeText={(e) => setInput(e)}
-          value={input}
-          placeholder="Your course Goal!"
+    <>
+      <StatusBar style='light'  />
+      <View style={stylesMain.mainStart}>
+        <View style={stylesMain.inputContainer}>
+          <TextInput
+            style={stylesMain.textInput}
+            onChangeText={(e) => setInput(e)}
+            value={input}
+            placeholder='Your course Goal!'
+          />
+          <Button onPress={() => handlePress()} title='Add Goal' />
+        </View>
+        <FlatList
+          data={list}
+          renderItem={(itemData) => {
+            return <List text={itemData.item} setList={setList} list={list} />;
+          }}
+          style={stylesMain.list}
         />
-        <Button onPress={() => handlePress()} title="Add Goal" />
       </View>
-      <ScrollView style={stylesMain.list}>
-        {list.map((item, index) => (
-          <View key={index + item} style={stylesMain.items}>
-            <Text onLongPress={(e) => handleRemove(e.target.children)}>
-              {item}
-            </Text>
-          </View>
-        ))}
-      </ScrollView>
-    </View>
+    </>
   );
 }
 
